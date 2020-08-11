@@ -12,12 +12,9 @@ class FlashChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterEasyLoading(
       child: MaterialApp(
-        initialRoute: WelcomeScreen().id,
+        initialRoute: "welcome_screen",
         routes: {
-          WelcomeScreen().id: (context) => WelcomeScreen(),
-          LoginScreen().id: (context) => LoginScreen(),
-          RegistrationScreen().id: (context) => RegistrationScreen(),
-          ChatScreen().id: (context) => ChatScreen(),
+          "welcome_screen" : (context) => WelcomeScreen(),
         },
       ),
     );

@@ -20,7 +20,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -40,6 +40,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+              style: TextStyle(color: Colors.white),
+              cursorColor: Colors.white,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
               onChanged: (value) {
@@ -59,6 +61,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               },
               decoration: KTextFieldDecoration.copyWith(
                   hintText: "Enter your password"),
+              style: TextStyle(color: Colors.white),
+              cursorColor: Colors.white,
             ),
             SizedBox(
               height: 24.0,
@@ -74,14 +78,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   if (newUser != null) {
                     EasyLoading.showSuccess('Registerd!');
                     EasyLoading.dismiss();
-                    Navigator.pushNamed(context, ChatScreen().id);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChatScreen()
+                        ),
+                        ModalRoute.withName("welcome_screen")
+                    );
                   }
                 } catch (e) {
                   EasyLoading.dismiss();
                   Fluttertoast.showToast(
                       msg: e.toString(),
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER);
+                      toastLength: Toast.LENGTH_LONG,
+                      backgroundColor: Colors.black);
                 }
               },
             ),

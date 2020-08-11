@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -41,6 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 48.0,
             ),
             TextField(
+              style: TextStyle(color: Colors.white),
+              cursorColor: Colors.white,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
               onChanged: (value) {
@@ -53,6 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 8.0,
             ),
             TextField(
+              style: TextStyle(color: Colors.white),
+              cursorColor: Colors.white,
               obscureText: true,
               textAlign: TextAlign.center,
               onChanged: (value) {
@@ -74,14 +78,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   if(user!=null){
                     EasyLoading.showSuccess('Logged In!');
                     EasyLoading.dismiss();
-                    Navigator.pushNamed(context, ChatScreen().id);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChatScreen()
+                        ),
+                        ModalRoute.withName("welcome_screen")
+                    );
                   }
                 }catch(e){
                   EasyLoading.dismiss();
                   Fluttertoast.showToast(
                       msg: e.toString(),
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER
+                      toastLength: Toast.LENGTH_LONG,
+                    backgroundColor: Colors.black
                   );
                 }
 

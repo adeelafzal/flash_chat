@@ -31,6 +31,7 @@ dependencies:
   animated_text_kit: ^2.2.0
   flutter_easyloading: ^1.1.4
   fluttertoast: ^7.0.2
+  intl: ^0.16.1
 
 
 dev_dependencies:
