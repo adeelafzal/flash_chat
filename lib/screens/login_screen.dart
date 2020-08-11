@@ -78,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if(user!=null){
                     EasyLoading.showSuccess('Logged In!');
                     EasyLoading.dismiss();
+                    Navigator.pop(context);
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

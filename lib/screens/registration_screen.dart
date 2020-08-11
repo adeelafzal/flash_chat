@@ -78,6 +78,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   if (newUser != null) {
                     EasyLoading.showSuccess('Registerd!');
                     EasyLoading.dismiss();
+                    Navigator.pop(context);
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
