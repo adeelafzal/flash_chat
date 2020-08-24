@@ -7,7 +7,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flash_chat/component/rounded_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
-
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -21,7 +20,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     try {
       FirebaseUser user = await FirebaseAuth.instance.currentUser();
       if (user != null) {
-        Navigator.pushNamed(context, ChatScreen().id);
+        Navigator.pop(context);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return ChatScreen();
+        }));
       }
     } catch (e) {
       print(e);
@@ -75,24 +78,26 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               height: 48.0,
             ),
             RoundButtonWidget(
-              text: "Log In", colour: Colors.lightBlueAccent, onPress: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => LoginScreen()
-
-              ));
-            },),
+              text: "Log In",
+              colour: Colors.lightBlueAccent,
+              onPress: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
+            ),
             RoundButtonWidget(
-              text: "Register", colour: Colors.blue, onPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RegistrationScreen()),
-              );
-            },),
+              text: "Register",
+              colour: Colors.blue,
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegistrationScreen()),
+                );
+              },
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-

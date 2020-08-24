@@ -78,14 +78,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   if (newUser != null) {
                     EasyLoading.showSuccess('Registerd!');
                     EasyLoading.dismiss();
-                    Navigator.pop(context);
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChatScreen()
-                        ),
-                        ModalRoute.withName("welcome_screen")
-                    );
+
                   }
                 } catch (e) {
                   EasyLoading.dismiss();

@@ -78,14 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   if(user!=null){
                     EasyLoading.showSuccess('Logged In!');
                     EasyLoading.dismiss();
-                    Navigator.pop(context);
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChatScreen()
-                        ),
-                        ModalRoute.withName("welcome_screen")
-                    );
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) {
+                      return ChatScreen();
+                    }), (route) => false);
                   }
                 }catch(e){
                   EasyLoading.dismiss();

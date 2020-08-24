@@ -1,3 +1,4 @@
+import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
@@ -10,6 +11,7 @@ FirebaseUser loggedInUser;
 
 class ChatScreen extends StatefulWidget {
   String id = 'chat_screen';
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -42,13 +44,17 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: null,
+        automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.close),
+              icon: Icon(Icons.power_settings_new),
               onPressed: () {
                 _auth.signOut();
                 Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return WelcomeScreen();
+                    }));
               }),
         ],
         title: Text('⚡️Chat'),
@@ -78,7 +84,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     onPressed: () {
                       messageTextController.clear();
                       DateTime now = DateTime.now();
-                      String formattedDate = DateFormat('kk:mm:ss EEE d MMM yyyy').format(now);
+                      String formattedDate =
+                          DateFormat('kk:mm:ss EEE d MMM yyyy').format(now);
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
@@ -143,9 +150,9 @@ class MessagesStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.sender, this.text,this.time, this.isMe});
+  MessageBubble({this.sender, this.text, this.time, this.isMe});
 
-  final String sender,time;
+  final String sender, time;
   final String text;
   final bool isMe;
 
@@ -155,7 +162,7 @@ class MessageBubble extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment:
-        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             sender,
@@ -167,14 +174,14 @@ class MessageBubble extends StatelessWidget {
           Material(
             borderRadius: isMe
                 ? BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                bottomLeft: Radius.circular(20.0),
-                bottomRight: Radius.circular(30.0))
+                    topLeft: Radius.circular(20.0),
+                    bottomLeft: Radius.circular(20.0),
+                    bottomRight: Radius.circular(30.0))
                 : BorderRadius.only(
-              bottomLeft: Radius.circular(30.0),
-              bottomRight: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
-            ),
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                  ),
             elevation: 5.0,
             color: isMe ? Colors.teal : Colors.white,
             child: Padding(
